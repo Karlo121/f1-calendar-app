@@ -7,7 +7,7 @@ export type CalendarProps = {
     onChange: React.Dispatch<React.SetStateAction<moment.Moment>>;
 }
 
-export interface IRaces {
+export interface IRace {
     season: string;
     round: string;
     url: string;

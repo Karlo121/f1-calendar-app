@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
-import { StyledCalendar, generateStyles } from './Calendar.style';
-import { CalendarProps, IRaces } from './Calendar.types';
-import { generateCalendar } from "./Calendar.helpers"
+import { StyledCalendar } from './Calendar.style';
+import { CalendarProps, IRace } from './Calendar.types';
+import { generateCalendar } from "./Calendar.helpers";
 
-import Header from "../Header/Header"
+import Header from "../Header/Header";
+import Day from "./Day/Day";
 
 import api from 'src/api/data';
 
 export const Calendar = (props: CalendarProps) => {
     const { date, onChange } = props;
 
-    const [data, setData] = useState<Array<IRaces>>([]);
+    const [data, setData] = useState<Array<IRace>>([]);
     const [calendar, setCalendar] = useState<Array<Array<moment.Moment>>>([]);
 
     useEffect(() => {
@@ -29,41 +30,21 @@ export const Calendar = (props: CalendarProps) => {
             }
         }
         fetchData();
-    }, [])
+    }, []);
 
-    const preparedCalendar = calendar.map(week =>
+    const renderCalendar = calendar.map((week) => (
         <div className="weekRow">
             {
-                week.map(day =>
-                    <div
-                        className={generateStyles(day, date)}
-                        onClick={() => onChange(day)}
-                    >
-                        <div>
-                            {
-                                date.format("MMMM") === day.format("MMMM")
-                                    ? <div>
-                                        {day.format("D")}
-                                        {
-                                            data.some(race => race.date === day.format("YYYY-MM-DD"))
-                                                ? <div className="raceDay">Race day</div>
-                                                : <></>
-                                        }
-                                    </div>
-                                    : <div className="hidden"></div>
-                            }
-                        </div>
-                    </div>
-                )
+                week.map((day, index) => <Day key={index} data={data} date={date} day={day} onChange={onChange} />)
             }
         </div>
-    );
+    ));
 
     return (
         <StyledCalendar>
             <div className="monthContainer">
                 <Header date={date} setDate={onChange} />
-                {preparedCalendar}
+                {renderCalendar}
             </div>
         </StyledCalendar>
     )

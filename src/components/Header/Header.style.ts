@@ -22,7 +22,22 @@ export const StyledHeader = styled.div`
     
     .buttons {
         text-align: right;
-        color: white;
+        color: black;
+        width: 70px;
+        padding: 5px;
+        margin-top: 10px;
+        background-color: white ;
+        border-radius: 10px;
+
+        .left:hover {
+            transform:scale(1.3,1.3);
+            cursor: pointer;
+        }
+
+        .right:hover {
+            transform:scale(1.3,1.3);
+            cursor: pointer;
+        }
     }
 
     .dayName {
