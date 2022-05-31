@@ -50,7 +50,6 @@ const Day = (props: DayProps) => {
                                                     {race.FirstPractice.time.slice(0, -1)} GMT
                                                 </div>
                                             </div>
-
                                             : <></>)
                                 )
                             }
