@@ -33,13 +33,24 @@ const Day = (props: DayProps) => {
                                             </div>
                                         </div>)
                                     : (race.Qualifying.date === day.format("YYYY-MM-DD")
-                                        ? <div className="raceDay">
-                                            {race.raceName} Qualifying
+                                        ? <div>
+                                            <div className="raceDay">
+                                                {race.raceName} Qualifying
+                                            </div>
+                                            <div className="raceCount">
+                                                {race.Qualifying.time.slice(0, -1)} GMT
+                                            </div>
                                         </div>
                                         : (race.FirstPractice.date === day.format("YYYY-MM-DD"))
-                                            ? <div className="raceDay">
-                                                {race.raceName} Practice
+                                            ? <div>
+                                                <div className="raceDay">
+                                                    {race.raceName} Practice
+                                                </div>
+                                                <div className="raceCount">
+                                                    {race.FirstPractice.time.slice(0, -1)} GMT
+                                                </div>
                                             </div>
+
                                             : <></>)
                                 )
                             }
